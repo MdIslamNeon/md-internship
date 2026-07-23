@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HotCollections = () => {
   const [nfts, setNft] = useState([]);
@@ -15,6 +15,12 @@ const HotCollections = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
+    responsive: [
+      { breakpoint: 1200, settings: { slidesToShow: 4 } },
+      { breakpoint: 992, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 576, settings: { slidesToShow: 1 } },
+    ],
   };
 
   async function fetchNFTData() {
@@ -40,10 +46,7 @@ const HotCollections = () => {
           </div>
           <Slider {...settings}>
             {nfts.map((nft) => (
-              <div
-                className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                key={nft.id}
-              >
+              <div key={nft.id}>
                 <div className="nft_coll">
                   <div className="nft_wrap">
                     <Link to="/item-details">
