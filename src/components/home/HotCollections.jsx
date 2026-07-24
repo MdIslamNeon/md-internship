@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const HotCollections = () => {
   const [nfts, setNft] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const settings = {
     dots: false,
@@ -24,10 +25,16 @@ const HotCollections = () => {
   };
 
   async function fetchNFTData() {
-    const { data } = await axios.get(
-      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
-    );
-    setNft(data);
+    try {
+      const { data } = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
+      );
+      setNft(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -44,39 +51,52 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <Slider {...settings}>
-            {nfts.map((nft) => (
-              <div key={nft.id}>
-                <div className="nft_coll">
-                  <div className="nft_wrap">
-                    <Link to="/item-details">
-                      <img
-                        src={nft.nftImage}
-                        className="lazy img-fluid"
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                  <div className="nft_coll_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-coll"
-                        src={nft.authorImage}
-                        alt=""
-                      />
-                    </Link>
-                    <i className="fa fa-check"></i>
-                  </div>
-                  <div className="nft_coll_info">
-                    <Link to="/explore">
-                      <h4>{nft.title}</h4>
-                    </Link>
-                    <span>ERC-{nft.code}</span>
-                  </div>
+          {loading ? (
+            <div>
+              <div className="nft_coll">
+                <div className="nft_wrap">
+                </div>
+                <div className="nft_coll_pp">
+                </div>
+                <div className="nft_coll_info">
                 </div>
               </div>
-            ))}
-          </Slider>
+            </div>
+          ) : (
+            <Slider {...settings}>
+              {nfts.map((nft) => (
+                <div key={nft.id}>
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
+                      <Link to="/item-details">
+                        <img
+                          src={nft.nftImage}
+                          className="lazy img-fluid"
+                          alt=""
+                        />
+                      </Link>
+                    </div>
+                    <div className="nft_coll_pp">
+                      <Link to="/author">
+                        <img
+                          className="lazy pp-coll"
+                          src={nft.authorImage}
+                          alt=""
+                        />
+                      </Link>
+                      <i className="fa fa-check"></i>
+                    </div>
+                    <div className="nft_coll_info">
+                      <Link to="/explore">
+                        <h4>{nft.title}</h4>
+                      </Link>
+                      <span>ERC-{nft.code}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
     </section>
