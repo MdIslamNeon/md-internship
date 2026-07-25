@@ -1,6 +1,5 @@
 import React from "react";
 import Skeleton from "./UI/Skeleton";
-import { Link } from "react-router-dom";
 
 function HotCollectionsLoading() {
   return (
