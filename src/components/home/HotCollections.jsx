@@ -4,6 +4,9 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Skeleton from "../UI/Skeleton";
+import HotCollection from "../HotCollection.jsx";
+import HotCollectionsLoading from "../HotCollectionsLoading.jsx";
 
 const HotCollections = () => {
   const [nfts, setNft] = useState([]);
@@ -52,48 +55,15 @@ const HotCollections = () => {
             </div>
           </div>
           {loading ? (
-            <div>
-              <div className="nft_coll">
-                <div className="nft_wrap">
-                </div>
-                <div className="nft_coll_pp">
-                </div>
-                <div className="nft_coll_info">
-                </div>
-              </div>
-            </div>
+            <Slider {...settings}>
+              {new Array(4).fill(0).map(() => (
+                <HotCollectionsLoading />
+              ))}
+            </Slider>
           ) : (
             <Slider {...settings}>
               {nfts.map((nft) => (
-                <div key={nft.id}>
-                  <div className="nft_coll">
-                    <div className="nft_wrap">
-                      <Link to="/item-details">
-                        <img
-                          src={nft.nftImage}
-                          className="lazy img-fluid"
-                          alt=""
-                        />
-                      </Link>
-                    </div>
-                    <div className="nft_coll_pp">
-                      <Link to="/author">
-                        <img
-                          className="lazy pp-coll"
-                          src={nft.authorImage}
-                          alt=""
-                        />
-                      </Link>
-                      <i className="fa fa-check"></i>
-                    </div>
-                    <div className="nft_coll_info">
-                      <Link to="/explore">
-                        <h4>{nft.title}</h4>
-                      </Link>
-                      <span>ERC-{nft.code}</span>
-                    </div>
-                  </div>
-                </div>
+                <HotCollection nft={nft} />
               ))}
             </Slider>
           )}
