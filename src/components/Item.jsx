@@ -38,7 +38,6 @@ function Item({ item }) {
           </Link>
         </div>
         {time ? <div className="de_countdown">{hours}h {minutes}m {seconds}s</div> : <></>}
-    
         <div className="nft__item_wrap">
           <div className="nft__item_extra">
             <div className="nft__item_buttons">
@@ -58,7 +57,7 @@ function Item({ item }) {
             </div>
           </div>
 
-          <Link to="/item-details">
+          <Link to={`/item-details/${item.nftId}`}>
             <img
               src={item.nftImage}
               className="lazy nft__item_preview"
