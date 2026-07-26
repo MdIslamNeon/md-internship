@@ -17,7 +17,11 @@ function Item({ item }) {
     return () => clearInterval(id);
   }, [item.expiryDate]);
 
-  //console.log(time);
+  const totalSeconds = Math.floor(time / 1000);
+
+  const seconds = totalSeconds % 60
+  const minutes = Math.floor(totalSeconds / 60) % 60
+  const hours = Math.floor(totalSeconds / 3600)
 
   return (
     <div className="px-2">
@@ -33,8 +37,8 @@ function Item({ item }) {
             <i className="fa fa-check"></i>
           </Link>
         </div>
-        <div className="de_countdown">5h 30m 32s</div>
-
+        {time ? <div className="de_countdown">{hours}h {minutes}m {seconds}s</div> : <></>}
+    
         <div className="nft__item_wrap">
           <div className="nft__item_extra">
             <div className="nft__item_buttons">
