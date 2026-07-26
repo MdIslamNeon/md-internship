@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Item({item}) {
+function Item({ item }) {
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    function calculateTime() {
+      if (!item.expiryDate) {
+        setTime(null);
+        return;
+      }
+      setTime(Math.max(item.expiryDate - Date.now(), 0));
+    }
+    calculateTime();
+    const id = setInterval(calculateTime, 1000);
+    return () => clearInterval(id);
+  }, [item.expiryDate]);
+
+  //console.log(time);
+
   return (
     <div className="px-2">
       <div className="nft__item">

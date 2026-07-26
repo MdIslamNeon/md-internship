@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../css/custom.css";
+import Skeleton from '../UI/Skeleton'
+import NewItemsLoading from "../../NewItemsLoading";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
@@ -55,9 +57,13 @@ const NewItems = () => {
             </div>
           </div>
           <Slider {...settings}>
-            {items.map((item) => (
-              <Item key={item.id} item={item} />
-            ))}
+            {loading
+              ? new Array(4).fill(0).map((_, index) => (
+                  <div className="px-2" key={index}>
+                    <NewItemsLoading />
+                  </div>
+                ))
+              : items.map((item) => <Item key={item.id} item={item} />)}
           </Slider>
         </div>
       </div>
