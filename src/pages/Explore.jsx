@@ -55,7 +55,7 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              <ExploreItems exploreItems={exploreItems}/>
+              {loading ? <></> : <ExploreItems exploreItems={exploreItems}/>}
             </div>
           </div>
         </section>
