@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
-const ExploreItems = () => {
+const ExploreItems = ({exploreItems}) => {
   return (
     <>
       <div>
@@ -14,9 +13,9 @@ const ExploreItems = () => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {new Array(8).fill(0).map((_, index) => (
+      {exploreItems.map((item) => (
         <div
-          key={index}
+          key={item.id}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
         >
@@ -27,7 +26,7 @@ const ExploreItems = () => {
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
-                <img className="lazy" src={AuthorImage} alt="" />
+                <img className="lazy" src={item.authorImage} alt="" />
                 <i className="fa fa-check"></i>
               </Link>
             </div>
@@ -39,30 +38,30 @@ const ExploreItems = () => {
                   <button>Buy Now</button>
                   <div className="nft__item_share">
                     <h4>Share</h4>
-                    <a href="" target="_blank" rel="noreferrer">
+                    <a href="/" target="_blank" rel="noreferrer">
                       <i className="fa fa-facebook fa-lg"></i>
                     </a>
-                    <a href="" target="_blank" rel="noreferrer">
+                    <a href="/" target="_blank" rel="noreferrer">
                       <i className="fa fa-twitter fa-lg"></i>
                     </a>
-                    <a href="">
+                    <a href="/">
                       <i className="fa fa-envelope fa-lg"></i>
                     </a>
                   </div>
                 </div>
               </div>
               <Link to="/item-details">
-                <img src={nftImage} className="lazy nft__item_preview" alt="" />
+                <img src={item.nftImage} className="lazy nft__item_preview" alt="" />
               </Link>
             </div>
             <div className="nft__item_info">
               <Link to="/item-details">
-                <h4>Pinky Ocean</h4>
+                <h4>{item.title}</h4>
               </Link>
-              <div className="nft__item_price">1.74 ETH</div>
+              <div className="nft__item_price">{item.price} ETH</div>
               <div className="nft__item_like">
                 <i className="fa fa-heart"></i>
-                <span>69</span>
+                <span>{item.likes}</span>
               </div>
             </div>
           </div>
