@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ExploreItem from "../ExploreItem";
 
-const ExploreItems = ({exploreItems}) => {
+const ExploreItems = ({ exploreItems }) => {
+  const [visibleCount, setVisibleCount] = useState(8);
+
+  const visibleItems = exploreItems.slice(0, visibleCount);
+  const hasMore = visibleCount < exploreItems.length;
+
+  function showMoreCards(event) {
+    event.preventDefault();
+    setVisibleCount((count) => count + 4);
+  }
+
   return (
     <>
       <div>
@@ -13,14 +23,21 @@ const ExploreItems = ({exploreItems}) => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {exploreItems.map((item) => (
+      {visibleItems.map((item) => (
         <ExploreItem key={item.id} item={item} />
       ))}
-      <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
-          Load more
-        </Link>
-      </div>
+      {hasMore && (
+        <div className="col-md-12 text-center">
+          <Link
+            to=""
+            id="loadmore"
+            className="btn-main lead"
+            onClick={showMoreCards}
+          >
+            Load more
+          </Link>
+        </div>
+      )}
     </>
   );
 };
