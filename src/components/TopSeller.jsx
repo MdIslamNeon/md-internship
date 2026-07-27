@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function TopSeller({ item }) {
   return (
-    <li key={item.id}>
+    <li>
       <div className="author_list_pp">
         <Link to="/author">
           <img className="lazy pp-author" src={item.authorImage} alt="" />

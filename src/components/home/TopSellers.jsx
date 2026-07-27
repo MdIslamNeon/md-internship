@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TopSeller from "../TopSeller";
+import TopSellerLoading from "../TopSellerLoading";
 
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
@@ -34,9 +35,13 @@ const TopSellers = () => {
           </div>
           <div className="col-md-12">
             <ol className="author_list">
-              {loading ? <></> : topSellers.map((item) => (
-                <TopSeller item={item} />
-              ))}
+              {loading
+                ? new Array(12).fill(0).map((_, index) => (
+                    <TopSellerLoading key={index} />
+                  ))
+                : topSellers.map((item) => (
+                    <TopSeller key={item.id} item={item} />
+                  ))}
             </ol>
           </div>
         </div>
