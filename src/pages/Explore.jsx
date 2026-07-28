@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SubHeader from "../images/subheader.jpg";
 import ExploreItems from "../components/explore/ExploreItems";
 import axios from "axios";
+import ExploreItemsLoading from "../components/ExploreItemsLoading";
 
 const Explore = () => {
 
@@ -55,7 +56,7 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              {loading ? <></> : <ExploreItems exploreItems={exploreItems}/>}
+              {loading ? <ExploreItemsLoading /> : <ExploreItems exploreItems={exploreItems}/>}
             </div>
           </div>
         </section>
