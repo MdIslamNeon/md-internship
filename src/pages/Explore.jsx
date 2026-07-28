@@ -8,11 +8,13 @@ const Explore = () => {
 
   const [exploreItems, setExploreIems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortMethod, setSortMethod] = useState('');
 
   useEffect(() => {
     async function fetchExploreItems() {
+      setLoading(true);
       try {
-        const {data} = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/explore");
+        const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${sortMethod}`);
         setExploreIems(data);
       }
       catch (error) {
@@ -23,13 +25,16 @@ const Explore = () => {
       }
     }
     fetchExploreItems();
-  }, [])
+  }, [sortMethod]);
 
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  function setSortedOption(event) {
+    setSortMethod(event.target.value);
+  }
 
   return (
     <div id="wrapper">
@@ -56,7 +61,7 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              {loading ? <ExploreItemsLoading /> : <ExploreItems exploreItems={exploreItems}/>}
+              {loading ? <ExploreItemsLoading /> : <ExploreItems exploreItems={exploreItems} sort={setSortedOption}/>}
             </div>
           </div>
         </section>

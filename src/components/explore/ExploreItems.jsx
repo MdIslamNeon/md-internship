@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ExploreItem from "../ExploreItem";
 
-const ExploreItems = ({ exploreItems }) => {
+const ExploreItems = ({ exploreItems, sort }) => {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const visibleItems = exploreItems.slice(0, visibleCount);
@@ -16,7 +16,7 @@ const ExploreItems = ({ exploreItems }) => {
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select id="filter-items" defaultValue="" onChange={sort}>
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
