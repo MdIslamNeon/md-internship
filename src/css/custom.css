@@ -1,0 +1,34 @@
+/* Custom overrides. Loaded last in index.css so these win without !important. */
+
+/* slick-theme.css draws the arrow glyphs in white, which is invisible
+   on this section's white background. Recolor and pull them inward. */
+#section-collections .slick-prev:before,
+#section-collections .slick-next:before {
+  color: black;
+  font-size: 24px;
+  opacity: 1;
+}
+
+#section-collections .slick-prev {
+  left: -30px;
+}
+
+#section-collections .slick-next {
+  right: -30px;
+}
+
+#section-collections .nft_coll {
+  margin: 0 10px;
+}
+
+/* Keep the arrows inside the slider. At -30px they sat outside .container
+   and got clipped at the viewport edge below 576px. */
+#section-collections .slick-prev {
+  left: 10px;
+  z-index: 1;
+}
+
+#section-collections .slick-next {
+  right: 10px;
+  z-index: 1;
+}
