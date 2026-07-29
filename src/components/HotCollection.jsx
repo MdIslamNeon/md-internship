@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function HotCollection({ nft }) {
+function HotCollection({ nft, authorId }) {
   return (
     <div key={nft.id}>
       <div className="nft_coll">
@@ -11,7 +11,7 @@ function HotCollection({ nft }) {
           </Link>
         </div>
         <div className="nft_coll_pp">
-          <Link to="/author">
+          <Link to={`/author/${authorId}`}>
             <img className="lazy pp-coll" src={nft.authorImage} alt="" />
           </Link>
           <i className="fa fa-check"></i>

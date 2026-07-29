@@ -54,14 +54,14 @@ const HotCollections = () => {
           </div>
           {loading ? (
             <Slider {...settings}>
-              {new Array(4).fill(0).map(() => (
-                <HotCollectionsLoading />
+              {new Array(4).fill(0).map((_, index) => (
+                <HotCollectionsLoading key={index} />
               ))}
             </Slider>
           ) : (
             <Slider {...settings}>
               {nfts.map((nft) => (
-                <HotCollection nft={nft} />
+                <HotCollection nft={nft} key={nft.id} authorId={nft.authorId} />
               ))}
             </Slider>
           )}
