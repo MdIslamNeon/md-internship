@@ -45,3 +45,8 @@
 .slick-next:focus:before {
   color: #fff;
 }
+
+/* Card gutter for the Hot Collections carousel (carried over from main). */
+#section-collections .nft_coll {
+  margin: 0 10px;
+}
