@@ -14,7 +14,7 @@ function ItemDetail({ itemDetails }) {
       </div>
       <div className="col-md-6">
         <div className="item_info">
-          <h2>{itemDetails.title}</h2>
+          <h2>{itemDetails.title} #{itemDetails.tag}</h2>
           <div className="item_info_counts">
             <div className="item_info_views">
               <i className="fa fa-eye"></i>
