@@ -1,0 +1,52 @@
+/* react-slick arrow overrides.
+   slick-theme.css renders these as white glyphs at left/right: -25px, which is
+   both invisible on this template's light body and outside the container. */
+.slick-prev,
+.slick-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  z-index: 2;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease;
+}
+
+/* slick-theme resets background to transparent on hover/focus. */
+.slick-prev:hover,
+.slick-next:hover,
+.slick-prev:focus,
+.slick-next:focus {
+  background: var(--primary-color);
+}
+
+.slick-prev {
+  left: 12px;
+}
+
+.slick-next {
+  right: 12px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 1;
+  color: #727272;
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before,
+.slick-prev:focus:before,
+.slick-next:focus:before {
+  color: #fff;
+}
+
+/* Card gutter for the Hot Collections carousel (carried over from main). */
+#section-collections .nft_coll {
+  margin: 0 10px;
+}
