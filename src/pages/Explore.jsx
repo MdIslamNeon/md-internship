@@ -1,11 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SubHeader from "../images/subheader.jpg";
 import ExploreItems from "../components/explore/ExploreItems";
+import axios from "axios";
+import ExploreItemsLoading from "../components/ExploreItemsLoading";
 
 const Explore = () => {
+
+  const [exploreItems, setExploreIems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [sortMethod, setSortMethod] = useState('');
+
+  useEffect(() => {
+    async function fetchExploreItems() {
+      setLoading(true);
+      try {
+        const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${sortMethod}`);
+        setExploreIems(data);
+      }
+      catch (error) {
+        console.log(error);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    fetchExploreItems();
+  }, [sortMethod]);
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  function setSortedOption(event) {
+    setSortMethod(event.target.value);
+  }
 
   return (
     <div id="wrapper">
@@ -32,7 +61,7 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              <ExploreItems />
+              {loading ? <ExploreItemsLoading /> : <ExploreItems exploreItems={exploreItems} sort={setSortedOption}/>}
             </div>
           </div>
         </section>
