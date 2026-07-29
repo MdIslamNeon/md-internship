@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../css/custom.css";
 import Skeleton from '../UI/Skeleton'
-import NewItemsLoading from "../../NewItemsLoading";
+import NewItemsLoading from "../NewItemsLoading";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
