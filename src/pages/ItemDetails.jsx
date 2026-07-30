@@ -32,7 +32,7 @@ const ItemDetails = () => {
   }, [id]);
 
   return (
-    <div id="wrapper">
+    <div id="wrapper" data-aos='fade-in'>
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
